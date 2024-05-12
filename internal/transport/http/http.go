@@ -48,6 +48,21 @@ func (s *Server) StartAndServe(metric metrics.Metrics) chan error {
 		panic(err)
 	}
 
+	err = prometheus.Register(metric.OrderTimeMetric.ReceiveMessageTime)
+	if err != nil {
+		panic(err)
+	}
+
+	err = prometheus.Register(metric.OrderTimeMetric.DeleteMessageTime)
+	if err != nil {
+		panic(err)
+	}
+
+	err = prometheus.Register(metric.OrderTimeMetric.SendMessageTime)
+	if err != nil {
+		panic(err)
+	}
+
 	router.Handler(http.MethodGet, "/metrics", promhttp.Handler())
 
 	if s.cfg.ProfilingEnabled {
