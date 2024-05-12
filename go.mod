@@ -5,10 +5,10 @@ go 1.22.1
 require (
 	github.com/arandich/marketplace-proto v0.0.0-20240511191518-0106528c9f0c
 	github.com/arandich/marketplace-sdk v0.0.0-20240511162816-982ba26284fe
-	github.com/aws/aws-sdk-go-v2 v1.26.1
+	github.com/aws/aws-sdk-go-v2 v1.22.2
 	github.com/aws/aws-sdk-go-v2/config v1.25.0
 	github.com/aws/aws-sdk-go-v2/credentials v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.32.0
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.26.0
 	github.com/creasty/defaults v1.7.0
 	github.com/goccy/go-json v0.10.2
 	github.com/joho/godotenv v1.5.1
@@ -22,8 +22,8 @@ require (
 
 require (
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.14.3 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.5 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.5 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.2 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.2 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.7.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.10.2 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sso v1.17.1 // indirect
