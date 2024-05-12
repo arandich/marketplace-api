@@ -1,0 +1,76 @@
+version: "3.5"
+
+services:
+  redis:
+    image: docker.io/bitnami/redis:7.0
+    container_name: redis
+    restart: always
+    ports:
+      - '127.0.0.1:6379:6379'
+    env_file:
+      - './redis.env'
+    volumes:
+      - './redis/redis.conf:/usr/local/etc/redis/redis.conf'
+      - 'redis_storage:/bitnami/redis/data'
+    networks:
+      - redis_network
+  marketplace-api:
+    container_name: marketplace-api
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - '0.0.0.0:7575:7575'
+    env_file:
+      - './service.env'
+    networks:
+      - redis_network
+      - marketplace_network
+  grafana:
+    image: grafana/grafana:10.3.1
+    container_name: grafana
+    restart: always
+    ports:
+      - '127.0.0.1:3000:3000'
+    volumes:
+      - 'grafana_storage:/var/lib/grafana'
+      - './grafana/grafana.ini:/etc/grafana/grafana.ini'
+      - './grafana/datasources:/etc/grafana/datasources'
+      - './grafana/dashboards:/etc/grafana/dashboards'
+    networks:
+      - marketplace_network
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: always
+    ports:
+      - '127.0.0.1:9090:9090'
+    volumes:
+      - 'prometheus_storage:/prometheus'
+      - './prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro'
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - marketplace_network
+# Volumes.
+volumes:
+  redis_storage:
+    driver: local
+  prometheus_storage:
+    driver: local
+  grafana_storage:
+    driver: local
+
+# Networks.
+networks:
+  marketplace_network:
+    name: marketplace_network
+    external: true
+  redis_network:
+    name: redis_network

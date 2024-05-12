@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+scrape_configs:
+  - job_name: rabbitmq
+    scheme: http
+    scrape_interval: 30s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['rabbitmq:15692']
+  - job_name: marketplace
+    scheme: http
+    scrape_interval: 30s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["marketplace-api:3795"]
