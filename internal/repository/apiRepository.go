@@ -47,11 +47,14 @@ func (a *ApiRepository) SubmitOrder(ctx context.Context, req *pb.SubmitOrderRequ
 		ItemIDs:  req.ItemIDs,
 	}
 
+	timeReqStart := time.Now()
 	err := a.orderQueue.PublishOrder(ctx, dto)
 	if err != nil {
 		a.logger.Error().Err(err).Msg("failed to push order to queue")
 		return nil, err
 	}
+	// diff time
+	a.promMetrics.OrderTimeMetric.RecordSendMessageTime(ctx, time.Since(timeReqStart))
 
 	a.redisClient.Set(ctx, req.ActionID, timeStart.Unix(), time.Minute*3)
 

@@ -96,10 +96,14 @@ func (o *OrderQueue) PublishOrder(ctx context.Context, order model.OrderMsg) err
 }
 
 func (o *OrderQueue) GetOrders(ctx context.Context) ([]model.OrderFromQueue, error) {
+	timeReqReceiveStart := time.Now()
 	orders, err := o.client.ReceiveMessage(ctx, &sqs.ReceiveMessageInput{
 		QueueUrl:        &o.queueURL,
 		WaitTimeSeconds: 20,
 	})
+
+	// diff time
+	o.metrics.OrderTimeMetric.RecordReceiveMessageTime(ctx, time.Since(timeReqReceiveStart))
 
 	if err != nil {
 		return nil, err
@@ -122,6 +126,7 @@ func (o *OrderQueue) GetOrders(ctx context.Context) ([]model.OrderFromQueue, err
 
 		ordersList[i] = orderModelFromQueue
 
+		timeReqDeleteStart := time.Now()
 		if _, err := o.client.DeleteMessage(
 			ctx,
 			&sqs.DeleteMessageInput{
@@ -131,6 +136,9 @@ func (o *OrderQueue) GetOrders(ctx context.Context) ([]model.OrderFromQueue, err
 		); err != nil {
 			log.Fatalln(err)
 		}
+
+		// diff time
+		o.metrics.OrderTimeMetric.RecordDeleteMessageTime(ctx, time.Since(timeReqDeleteStart))
 	}
 
 	return ordersList, nil
