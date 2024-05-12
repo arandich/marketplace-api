@@ -53,7 +53,7 @@ func (a *ApiRepository) SubmitOrder(ctx context.Context, req *pb.SubmitOrderRequ
 		return nil, err
 	}
 
-	a.redisClient.Set(ctx, req.ActionID, timeStart.Unix(), time.Minute)
+	a.redisClient.Set(ctx, req.ActionID, timeStart.Unix(), time.Minute*3)
 
 	return &pb.SubmitOrderResponse{Status: model.InProgress}, nil
 }
