@@ -18,7 +18,7 @@ func NewOrderMetrics(cfg prometheus.Config) OrderTimeMetric {
 		Subsystem: cfg.Subsystem,
 		Name:      "order_time",
 		Help:      "Order time histogram (ms)",
-		Buckets:   prom.LinearBuckets(0.01, 0.05, 10),
+		Buckets:   []float64{5, 10, 25, 50, 100, 250, 500, 1000},
 	}
 
 	return OrderTimeMetric{
