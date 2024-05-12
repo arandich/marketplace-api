@@ -2,8 +2,8 @@ github.com/arandich/marketplace-proto v0.0.0-20240511191518-0106528c9f0c h1:UCl/
 github.com/arandich/marketplace-proto v0.0.0-20240511191518-0106528c9f0c/go.mod h1:Vv9GK6Dj4vVLt4Qe105CRRrEZKjEoFcPDCpgTR69llU=
 github.com/arandich/marketplace-sdk v0.0.0-20240511162816-982ba26284fe h1:TB1nNhG19ah4VnmMlxX5kmcIuCt5y4BbsuKmdbM2Fok=
 github.com/arandich/marketplace-sdk v0.0.0-20240511162816-982ba26284fe/go.mod h1:LGDB9eX/h7kWgU/yvmXsVoOTbE36sJBFeNc3jKa53Fo=
-github.com/aws/aws-sdk-go-v2 v1.22.2 h1:lV0U8fnhAnPz8YcdmZVV60+tr6CakHzqA6P8T46ExJI=
-github.com/aws/aws-sdk-go-v2 v1.22.2/go.mod h1:Kd0OJtkW3Q0M0lUWGszapWjEvrXDzRW+D21JNsroB+c=
+github.com/aws/aws-sdk-go-v2 v1.26.1 h1:5554eUqIYVWpU0YmeeYZ0wU64H2VLBs8TlhRB2L+EkA=
+github.com/aws/aws-sdk-go-v2 v1.26.1/go.mod h1:ffIFB97e2yNsv4aTSGkqtHnppsIJzw7G7BReUZ3jCXM=
 github.com/aws/aws-sdk-go-v2/config v1.25.0 h1:WCwAqyrM/kqYi6pHjVpq/w2pLydeGKv8Af9vdtO3ciM=
 github.com/aws/aws-sdk-go-v2/config v1.25.0/go.mod h1:1QMnmhoWcR6957nC1MUUhhOLx9NOGFSVNG3Mag9vLU4=
 github.com/aws/aws-sdk-go-v2/credentials v1.16.0 h1:sSEHkXonpZBSPcyUBDRlZjxOi14qM/UK7/vfKhGwmTo=
